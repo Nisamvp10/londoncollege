@@ -96,8 +96,9 @@
                 <div class="th-mobile-menu-bottom">
                     <form class="th-mobile-search" action="#"><input type="text" placeholder="Search..."> <button
                             class="icon-btn" type="submit"><i class="fal fa-search"></i></button></form>
+
                     <div class="btn-wrap">
-                        <a href="https://wa.me/919526196155" class="th-btn w-100">
+                        <a href="" class="th-btn w-100" id="applyNowBtnN">
                             APPLY NOW
                             <svg class="ms-2" width="16" height="14" viewBox="0 0 16 14" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -202,7 +203,7 @@
                                 <button type="button"
                                     class="icon-btn style-border searchBoxToggler d-lg-block d-none"><i
                                         class="fal fa-search"></i></button>
-                                <a href="https://wa.me/919526196155" class="th-btn">
+                                <a href="javascript:void(0)" class="th-btn" id="applyNowBtn">
                                     APPLY NOW
                                     <svg class="ms-2" width="16" height="14" viewBox="0 0 16 14" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -2164,7 +2165,19 @@
 
 
 
+    <script>
+        $(document).ready(function () {
 
+            $('#applyNowBtn').on('click', function (e) {
+                e.preventDefault();
+
+                $('html, body').animate({
+                    scrollTop: $('#contact-sec').offset().top
+                }, 800);
+            });
+
+        });
+    </script>
 
     <!-- GetButton.io widget -->
     <script type="text/javascript">
@@ -2191,5 +2204,6 @@
     <!-- End Google Tag Manager (noscript) -->
 
 </body>
+
 
 </html>
