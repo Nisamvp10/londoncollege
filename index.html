@@ -1455,7 +1455,7 @@
                                         <div class="box-content">
                                             <h3 class="box-title">Call Us</h3>
                                             <p class="box-text">Any time for flight booking.</p>
-                                            <a class="box-link" href="#">+91 9526196155</a>
+                                            <a class="box-link" href="tel:+919526196555">+91 9526196555</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1467,7 +1467,8 @@
                                         <div class="box-content">
                                             <h3 class="box-title">Official Email</h3>
                                             <p class="box-text">Email us for any quires</p>
-                                            <a class="box-link" href="#">londoncollegein@gmail.com</a>
+                                            <a class="box-link"
+                                                href="mailto:londoncollegein@gmail.com">londoncollegein@gmail.com</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1519,7 +1520,7 @@
                                             <img src="assets/img/favicon.png" alt="img">Get In Touch
                                         </span>
                                         <h2 class="sec-title text-white th_fade_anim">
-                                            <span class="th-text-perspective">Sign Up for Free Resources</span>
+                                            <span class="th-text-perspective">Applay Now</span>
                                         </h2>
                                     </div>
                                     <div class="row">
@@ -2163,7 +2164,10 @@
         </div>
     </div>
 
-
+    <div class="call-buton clbtn-show"><a class="cc-calto-action-ripple" href="tel:+919526196555">
+            <img class="img-circle" src="assets/img/phone.png" alt="Best smart phone service center in tirur"
+                width="100%" title="Best smart phone service center in tirur">
+        </a></div>
 
     <script>
         $(document).ready(function () {
@@ -2177,10 +2181,49 @@
             });
 
         });
+        // 
+
+    </script>
+
+    <script>
+        var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?47253';
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url;
+        var options = {
+            "enabled": true,
+            "chatButtonSetting": {
+                "backgroundColor": "#4dc247",
+                "ctaText": "",
+                "borderRadius": "25",
+                "marginLeft": "0",
+                "marginBottom": "50",
+                "marginRight": "10",
+                "position": "right"
+            },
+            "brandSetting": {
+                "brandName": "London College of Interior Design",
+                "brandSubTitle": "London College",
+                "brandImg": "https://mobilematecare.com/frondend/images/logo.png",
+                "welcomeText": "Hi there!\nHow can I help you?",
+                "messageText": "",
+                "backgroundColor": "#0a5f54",
+                "ctaText": "Start Chat",
+                "borderRadius": "25",
+                "autoShow": false,
+                "phoneNumber": "00919656104665"
+            }
+        };
+        s.onload = function () {
+            CreateWhatsappChatWidget(options);
+        };
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
     </script>
 
     <!-- GetButton.io widget -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         (function () {
             var options = {
                 call: "+919526196555", // Call phone number
@@ -2195,7 +2238,7 @@
             s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
             var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
         })();
-    </script>
+    </script> -->
     <!-- /GetButton.io widget -->
 
     <!-- Google Tag Manager (noscript) -->
