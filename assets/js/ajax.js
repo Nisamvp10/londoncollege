@@ -25,7 +25,7 @@ $('#contactForm').on('submit', function (e) {
         success: function (response) {
             if (response.status == 'success') {
                 formId[0].reset();
-                alert(response.message);
+                window.location.href = "success.html";
                 $('#submitBtn').prop('disabled', false).html(comonBtn);
             } else {
                 if (response.validate) {

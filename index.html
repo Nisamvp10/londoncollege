@@ -2169,6 +2169,72 @@
                 title="London College of Interior Design">
         </a></div>
 
+    <!-- ══════════════════════════════════
+     SCHOLARSHIP POPUP
+══════════════════════════════════ -->
+    <div id="popup-overlay">
+        <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+
+            <!-- BIG VISIBLE CLOSE BUTTON -->
+            <button class="popup-close" onclick="closePopup()" aria-label="Close popup">✕</button>
+
+            <div class="popup-top">
+                <div class="seal">
+                    <div class="seal-inner">
+                        <div class="seal-text">
+                            <span class="seal-percent">20%</span>
+                            <span class="seal-off">OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <h3 id="popup-title">🎓 Scholarship Alert!<br>Get <em>20% Off</em> Your Fees</h3>
+                <p>Limited seats · Upcoming batch · Apply before the deadline</p>
+            </div>
+
+            <div class="popup-body">
+                <!-- onsubmit="handlePopupForm(event)" -->
+                <form class="popup-form" id="popup-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Full Name *" class="form-control" name="pop-name"
+                            id="pop-name" required>
+                        <div class="pop-name-error text-danger"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="WhatsApp Number *" class="form-control" name="pop-phone"
+                            id="pop-phone" pattern="[0-9]{10}" required>
+                        <div class="pop-phone-error text-danger"></div>
+                    </div>
+                    <div class="form-group">
+
+                        <select id="pop-course" name="pop-course" class="form-control">
+                            <option value="" disabled selected>Select Course of Interest</option>
+                            <option value="1 Year Diploma – Interior &amp; Exterior Design">1 Year Diploma – Interior
+                                &amp; Exterior Design</option>
+                            <option value="Master Diploma – Interior &amp; Exterior Design">Master Diploma – Interior
+                                &amp; Exterior Design</option>
+                            <option value="B.Sc Interior Design (Alagappa University)">B.Sc Interior Design (Alagappa
+                                University)</option>
+                            <option value="Not Sure – Help Me Choose">Not Sure – Help Me Choose</option>
+                        </select>
+                        <div class="pop-course-error text-danger"></div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" name="send" id="popup-submit" class="popup-submit">✅ Check My Scholarship
+                            Eligibility
+                            →</button>
+                    </div>
+                </form>
+                <p class="popup-disclaimer">🔒 Your details are 100% private. Our counsellor will WhatsApp you within 24
+                    hours.</p>
+                <div class="whatsapp-alt">
+                    <span>Or chat directly:</span>
+                    <a href="https://wa.me/919526196155?text=Hi%2C%20I%20want%20to%20know%20about%20the%2020%25%20scholarship"
+                        target="_blank">💬 WhatsApp Us Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function () {
 
@@ -2245,6 +2311,152 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVX2TC58" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+
+    <script>
+        /* ── POPUP ── */
+        let popupOpened = false;
+        function openPopup() {
+            if (popupOpened) return; // only auto-open once; manual opens always work
+            document.getElementById('popup-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            popupOpened = true;
+        }
+        function openPopupManual() {
+            document.getElementById('popup-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closePopup() {
+            document.getElementById('popup-overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        // close on backdrop click
+        document.getElementById('popup-overlay').addEventListener('click', function (e) {
+            if (e.target === this) closePopup();
+        });
+        // close on Escape
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePopup(); });
+        // all manual triggers
+        document.querySelectorAll('[onclick*="openPopup"]').forEach(function (el) {
+            el.removeAttribute('onclick');
+            el.addEventListener('click', function (e) { e.preventDefault(); openPopupManual(); });
+        });
+        // Auto-open after 4s (once)
+        setTimeout(openPopup, 4000);
+        // Exit-intent desktop
+        document.addEventListener('mouseleave', function (e) {
+            if (e.clientY < 10) { openPopup(); }
+        }, { once: true });
+
+        /* ── COUNTDOWN (shared) ── */
+
+
+
+        /* ── FORM SUBMIT – popup ── */
+        //function handlePopupForm(e) {
+        $('#popup-form').on('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('pop-name').value;
+            const course = document.getElementById('pop-course').value || 'Not specified';
+            const ph = document.getElementById('pop-phone').value || 'Not specified';
+
+            // const msg = `Hi! I'm ${name}.\n I'm interested in the 20% scholarship for: ${course}\n. My Phone Number is: ${ph} \n Please share details.`;
+            // window.open(`https://wa.me/917403312120?text=${encodeURIComponent(msg)}`, '_blank');
+
+
+            formData = new FormData(this);
+            let formId = $('#popup-form');
+            formData.append('send', true)
+            formId.find('.is-invalid').removeClass('is-invalid');
+            formId.find('.invalid-feedback').empty();
+            $('#popup-submit').prop('disabled', true).html(
+                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...'
+            );
+            let comonBtn = ` <button type="submit" id="popup-submit" class="popup-submit">✅ Check My Scholarship Eligibility
+                            →</button>`;
+
+
+            $.ajax({
+                url: 'handle-popup-form.php',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                success: function (response) {
+
+                    if (response.status == 'success') {
+                        formId[0].reset();
+                        // WhatsApp message after successful email
+                        //const whatsappMsg = `Hi! I'm ${name}.\nI'm interested in the 20% scholarship for: ${course}\n. My Phone Number is: ${ph} \n Please share details.`;
+                        //window.open(`https://wa.me/917403312120?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
+                        window.location.href = "success.html";
+                        closePopup();
+
+                        $('#submitBtn').prop('disabled', false).html(comonBtn);
+                    } else {
+                        if (response.validate) {
+                            $.each(response.validate, function (key, value) {
+                                $('#' + key).addClass('is-invalid');
+                                $('#' + key + '_error').text(`${value}`);
+                            });
+                        }
+                        $('#submitBtn').prop('disabled', false).html(comonBtn);
+                        alert(response.message);
+                    }
+                },
+                error: function (error) {
+                    // handle error here
+                    console.error("ERROR:", error);
+                }
+            });
+
+        })
+
+        /* ── FORM SUBMIT – hero ── */
+        function handleHeroForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('h-name').value;
+            const course = document.getElementById('h-course').value || 'Not specified';
+            const msg = `Hi! I'm ${name}. Enquiring about the 20% scholarship for: ${course}. Please call/WhatsApp me.`;
+            window.open(`https://wa.me/919526196155?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        /* ── MOBILE MENU ── */
+        const hamBtn = document.getElementById('ham-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        hamBtn.addEventListener('click', function () {
+            const open = mobileMenu.classList.toggle('open');
+            hamBtn.setAttribute('aria-expanded', open);
+        });
+        function closeMobileMenu() { mobileMenu.classList.remove('open'); hamBtn.setAttribute('aria-expanded', 'false'); }
+
+        /* ── FAQ ── */
+        document.querySelectorAll('.faq-q').forEach(function (q) {
+            q.addEventListener('click', function () {
+                const item = this.closest('.faq-item');
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        /* ── SCROLL REVEAL ── */
+        const revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                    e.target.style.opacity = '1';
+                    e.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.why-card,.course-card,.testi-card').forEach(function (el) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(22px)';
+            el.style.transition = 'opacity .5s ease,transform .5s ease';
+            revealObserver.observe(el);
+        });
+    </script>
 
 </body>
 

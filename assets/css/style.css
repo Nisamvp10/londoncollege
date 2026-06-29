@@ -33119,3 +33119,286 @@ span.num {
 	top: 0px;
 	background: #313135;
 }
+
+/* ══════════════════════════════════════
+   POPUP
+══════════════════════════════════════ */
+#popup-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(10, 8, 6, 0.82);
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity .35s;
+	margin-top: 5em;
+}
+
+#popup-overlay.active {
+	opacity: 1;
+	pointer-events: all
+}
+
+.popup {
+	background: var(--white-color);
+	border-radius: 16px;
+	max-width: 500px;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	transform: scale(0.88) translateY(28px);
+	transition: transform .42s cubic-bezier(.34, 1.56, .64, 1);
+	max-height: 90vh;
+	overflow-y: auto;
+}
+
+#popup-overlay.active .popup {
+	transform: scale(1) translateY(0)
+}
+
+/* ── CLOSE BUTTON – large and obvious ── */
+.popup-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 14px 14px 0 0;
+	z-index: 10;
+	background: rgba(0, 0, 0, 0.08);
+	border: 2px solid rgba(0, 0, 0, 0.12);
+	color: #d1d1d1;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	cursor: pointer;
+	font-size: 1.1rem;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all .2s;
+	line-height: 1;
+	border: 1px #ddd solid;
+}
+
+
+
+.popup-close:hover {
+	background: var(--red);
+	border-color: var(--red);
+	color: var(--white);
+	transform: scale(1.08)
+}
+
+.popup-top {
+	background: linear-gradient(135deg, #12100E 0%, #2D2418 100%);
+	padding: 8px 24px 24px;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.popup-top::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse at center, rgba(201, 146, 42, 0.18) 0%, transparent 65%);
+}
+
+.seal {
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 14px;
+	animation: seal-in .55s .25s both;
+	position: relative;
+	z-index: 2;
+}
+
+@keyframes seal-in {
+	from {
+		transform: scale(0) rotate(-15deg);
+		opacity: 0
+	}
+
+	to {
+		transform: scale(1) rotate(0);
+		opacity: 1
+	}
+}
+
+.seal-inner {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background: conic-gradient(from 0deg, var(--gold), var(--gold-light), var(--gold), var(--gold-light), var(--gold));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 0 4px rgba(201, 146, 42, 0.18), 0 0 28px rgba(201, 146, 42, 0.45);
+}
+
+.seal-text {
+	text-align: center;
+	font-family: 'Cormorant Garamond', serif;
+	color: var(--dark)
+}
+
+.seal-percent {
+	font-size: 1.9rem;
+	font-weight: 700;
+	line-height: 1;
+	display: block
+}
+
+.seal-off {
+	font-size: 0.6rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	text-transform: uppercase
+}
+
+.popup-top h3 {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 1.6rem;
+	font-weight: 700;
+	color: var(--white);
+	line-height: 1.2;
+	position: relative;
+	z-index: 2;
+}
+
+.popup-top h3 em {
+	color: var(--gold);
+	font-style: italic
+}
+
+.popup-top p {
+	color: rgba(255, 255, 255, 0.55);
+	font-size: 0.8rem;
+	margin-top: 6px;
+	position: relative;
+	z-index: 2
+}
+
+.popup-body {
+	padding: 20px 24px 28px
+}
+
+
+.urgency-icon {
+	font-size: 1.1rem;
+	flex-shrink: 0
+}
+
+.urgency-text {
+	font-size: 0.8rem;
+	color: var(--red);
+	font-weight: 600;
+	line-height: 1.45
+}
+
+#countdown {
+	font-weight: 700;
+	letter-spacing: 0.04em
+}
+
+.popup-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px
+}
+
+.popup-form input,
+.popup-form select {
+	padding: 12px 14px;
+	border: 1.5px solid #E5E0DA;
+	border-radius: 7px;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 0.88rem;
+	color: var(--ink);
+	transition: border-color .2s;
+	outline: none;
+	width: 100%;
+	background: var(--white);
+	appearance: none;
+}
+
+.popup-form input:focus,
+.popup-form select:focus {
+	border-color: var(--gold)
+}
+
+.popup-form input::placeholder {
+	color: #ADA8A3
+}
+
+.popup-submit {
+	background: #ef9e35;
+	color: #000;
+	border: none;
+	padding: 14px;
+	border-radius: 7px;
+	font-family: 'DM Sans', sans-serif;
+	font-weight: 700;
+	font-size: 0.9rem;
+	letter-spacing: 0.05em;
+	cursor: pointer;
+	width: 100%;
+	text-transform: uppercase;
+	transition: all .25s;
+	box-shadow: 0 4px 16px rgba(201, 146, 42, 0.38);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.popup-submit:hover {
+	background: #E8B84B;
+	transform: translateY(-1px)
+}
+
+.popup-disclaimer {
+	font-size: 0.72rem;
+	color: var(--muted);
+	text-align: center;
+	margin-top: 8px;
+	line-height: 1.5
+}
+
+.whatsapp-alt {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 14px;
+	padding-top: 14px;
+	border-top: 1px solid rgba(0, 0, 0, 0.07);
+	flex-wrap: wrap;
+}
+
+.whatsapp-alt span {
+	font-size: 0.78rem;
+	color: var(--muted)
+}
+
+.whatsapp-alt a {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: #25d366;
+	color: var(--white);
+	padding: 10px 18px;
+	border-radius: 6px;
+	font-weight: 700;
+	font-size: 0.82rem;
+	text-decoration: none;
+	transition: background .2s;
+}
+
+.whatsapp-alt a:hover {
+	background: #1EBF5A
+}
