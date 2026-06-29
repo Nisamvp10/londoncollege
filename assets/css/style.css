@@ -33403,3 +33403,7 @@ span.num {
 .whatsapp-alt a:hover {
 	background: #1EBF5A
 }
+
+#contact-sec {
+	padding: 0 !important;
+}
