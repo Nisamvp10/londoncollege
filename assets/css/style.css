@@ -33152,8 +33152,8 @@ span.num {
 	overflow: hidden;
 	transform: scale(0.88) translateY(28px);
 	transition: transform .42s cubic-bezier(.34, 1.56, .64, 1);
-	max-height: 90vh;
-	overflow-y: auto;
+	/* max-height: 90vh; */
+	/* overflow-y: auto; */
 }
 
 #popup-overlay.active .popup {
