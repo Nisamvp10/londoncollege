@@ -33378,6 +33378,7 @@ span.num {
 	padding-top: 14px;
 	border-top: 1px solid rgba(0, 0, 0, 0.07);
 	flex-wrap: wrap;
+	display: none;
 }
 
 .whatsapp-alt span {
