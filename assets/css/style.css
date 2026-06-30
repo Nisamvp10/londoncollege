@@ -33280,11 +33280,12 @@ span.num {
 	font-size: 0.8rem;
 	margin-top: 6px;
 	position: relative;
-	z-index: 2
+	z-index: 2;
+	margin: 0;
 }
 
 .popup-body {
-	padding: 20px 24px 28px
+	padding: 10px
 }
 
 
