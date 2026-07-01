@@ -2342,7 +2342,7 @@
             el.addEventListener('click', function (e) { e.preventDefault(); openPopupManual(); });
         });
         // Auto-open after 4s (once)
-        setTimeout(openPopup, 4000);
+        setTimeout(openPopup, 12000);
         // Exit-intent desktop
         document.addEventListener('mouseleave', function (e) {
             if (e.clientY < 10) { openPopup(); }
